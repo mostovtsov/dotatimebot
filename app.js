@@ -4,12 +4,12 @@ const steelassholesGroupId = -1001039990033;
 const fs = require('fs');
 const Telegraf = require('telegraf');
 const { Telegram } = require('telegraf');
-var port = process.env.PORT || 443;
-var host = '0.0.0.0';  // probably this change is not required
-var externalUrl = process.env.CUSTOM_ENV_VARIABLE || 'https://dotatimebot.herokuapp.com/';
+//var port = process.env.PORT || 443;
+//var host = '0.0.0.0';  // probably this change is not required
+//var externalUrl = process.env.CUSTOM_ENV_VARIABLE || 'https://dotatimebot.herokuapp.com/';
 
-const telegram = new Telegram(token, { webHook: { port: port, host: host } });
-telegram.setWebHook(externalUrl + ':443/bot' + token);
+const telegram = new Telegram(token, { agent: null });
+//telegram.setWebHook(externalUrl + ':443/bot' + token);
 const app = new Telegraf(token);
 
 var users;

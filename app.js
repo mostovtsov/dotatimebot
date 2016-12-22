@@ -1,4 +1,4 @@
-const token = '305297288:AAGNw0Tdxg_Ujqsm_Ip4W_hv5rSRmAZYWUc';
+const token = '305297288:AAGNw0Tdxg_Ujqsm_Ip4W_hv5rSRmAZYWUc'; 80447347730
 const steelassholesGroupId = -1001039990033;
 
 const fs = require('fs');
@@ -29,7 +29,7 @@ app.command('start', (ctx) => {
 app.command('help', (ctx) => {
     console.log('help', ctx.from.first_name);
     ctx.reply(`dota - to start notify group members for starting game`);
-    ctx.reply(`last - to show last matches URL from dotabuff.com`);
+    ctx.reply(`last - to show last matches from dotabuff.com`);
     ctx.reply(`twitch - to show live dota 2`);
 });
 
@@ -56,15 +56,44 @@ app.command('dota', (ctx) => {
     });
 });
 
+var generateCharTemplate = (char) => {
+    return `[${char.toLowerCase()}|${char.toUpperCase()}]`;
+};
+
+var getAnyCaseRegex = (word) => {
+    var regStr = '(';
+
+    for (i = 0; i < word.length; i++) {
+        regStr += generateCharTemplate(word[i]);
+    }
+
+    regStr += ')';
+
+    return new RegExp(regStr);
+};
+
 app.hears('hi', (ctx) => ctx.reply('Hey there!'));
 app.hears('писос', (ctx) => ctx.reply('Сам ты писос!'));
 app.hears('лесник', (ctx) => ctx.reply('Лесники это ЗБС!'));
-app.hears('славик', (ctx) => ctx.reply('ЛОХ'));
-app.hears('александр', (ctx) => ctx.reply('Уважаемый'));
-app.hears('макс', (ctx) => ctx.reply('вор'));
-app.hears('костя', (ctx) => ctx.reply('вор'));
+const sashaRegex = new RegExp('александр');
+const slavaRegex = getAnyCaseRegex('славик');
+const maxRegex = new RegExp('макс');
+const kostiyaRegex = getAnyCaseRegex('костя');
+
+app.hears(slavaRegex, (ctx) => ctx.reply('так себе игрок'));
+// app.hears(['александр', 'Александр', 'АЛЕКСАНДР'], (ctx) => ctx.reply('Уважаемый'));
+app.hears(sashaRegex, (ctx) => ctx.reply('Уважаемый'));
+app.hears(maxRegex, (ctx) => ctx.reply('вор'));
+app.hears(kostiyaRegex, (ctx) => ctx.reply('минипижек'));
 app.hears('go', (ctx) => ctx.reply('Go Go Go!'));
 app.hears('хуй', (ctx) => ctx.reply('хуюй'));
+app.hears('твоя мать', (ctx) => ctx.reply('даёт'));
+app.hears('вы дальше не пройдёте', (ctx) => ctx.reply('пока не получите бумаги'));
+app.hears('гавно твой бот', (ctx) => ctx.reply(`Да сам ты гавно ${ctx.from.first_name}`));
+
+
+
+
 
 
 app.on('sticker', (ctx) => ctx.reply('👍'));

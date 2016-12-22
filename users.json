@@ -1,0 +1,39 @@
+[
+    {
+        "user": {
+            "id": 192662525,
+            "first_name": "Славик",
+            "username": "hsgiga"
+        },
+        "status": "administrator",
+        "URL": "https://www.dotabuff.com/players/137789288/matches"
+    },
+    {
+        "user": {
+            "id": 209963527,
+            "first_name": "Kanstantsin",
+            "last_name": "Arkhipenka"
+        },
+        "status": "administrator",
+        "URL" : "https://www.dotabuff.com/players/137789288/matches"
+    },
+    {
+        "user": {
+            "id": 190659817,
+            "first_name": "madm1st",
+            "last_name": "max"
+        },
+        "status": "administrator",
+        "URL": "https://www.dotabuff.com/players/137803983/matches"
+    },
+    {
+        "user": {
+            "id": 208386144,
+            "first_name": "Sasha",
+            "last_name": "M.",
+            "username": "IIIypik"
+        },
+        "status": "creator",
+        "URL" : "https://www.dotabuff.com/players/71052189/matches"
+    }
+]

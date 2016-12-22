@@ -1,0 +1,19 @@
+{
+  "name": "dotatimebot",
+  "version": "1.0.0",
+  "description": "Telegram bot for notify dota2 team members",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "dota2"
+  ],
+  "author": "mostovtsov@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "telegraf": "^3.6.3"
+  }
+}

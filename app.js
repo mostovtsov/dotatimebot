@@ -1,15 +1,12 @@
-const token = '305297288:AAGNw0Tdxg_Ujqsm_Ip4W_hv5rSRmAZYWUc'; 80447347730
+const token = '305297288:AAGNw0Tdxg_Ujqsm_Ip4W_hv5rSRmAZYWUc';
 const steelassholesGroupId = -1001039990033;
 
 const fs = require('fs');
 const Telegraf = require('telegraf');
-const { Telegram } = require('telegraf');
-//var port = process.env.PORT || 443;
-//var host = '0.0.0.0';  // probably this change is not required
-//var externalUrl = process.env.CUSTOM_ENV_VARIABLE || 'https://dotatimebot.herokuapp.com/';
+const Telegram = require('telegraf').Telegram;
 
 const telegram = new Telegram(token, { agent: null });
-//telegram.setWebHook(externalUrl + ':443/bot' + token);
+
 const app = new Telegraf(token);
 
 var users;
@@ -81,20 +78,14 @@ const maxRegex = new RegExp('макс');
 const kostiyaRegex = getAnyCaseRegex('костя');
 
 app.hears(slavaRegex, (ctx) => ctx.reply('так себе игрок'));
-// app.hears(['александр', 'Александр', 'АЛЕКСАНДР'], (ctx) => ctx.reply('Уважаемый'));
 app.hears(sashaRegex, (ctx) => ctx.reply('Уважаемый'));
 app.hears(maxRegex, (ctx) => ctx.reply('вор'));
 app.hears(kostiyaRegex, (ctx) => ctx.reply('минипижек'));
 app.hears('go', (ctx) => ctx.reply('Go Go Go!'));
 app.hears('хуй', (ctx) => ctx.reply('хуюй'));
 app.hears('твоя мать', (ctx) => ctx.reply('даёт'));
-app.hears('вы дальше не пройдёте', (ctx) => ctx.reply('пока не получите бумаги'));
+app.hears('дальше вы не пройдёте', (ctx) => ctx.reply('пока не получите бумаги'));
 app.hears('гавно твой бот', (ctx) => ctx.reply(`Да сам ты гавно ${ctx.from.first_name}`));
-
-
-
-
-
 
 app.on('sticker', (ctx) => ctx.reply('👍'));
 
@@ -103,9 +94,3 @@ app.catch((err) => {
 })
 
 app.startPolling();
-
-// module.exports = {
-//     users,
-//     app,
-//     telegram
-// }

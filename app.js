@@ -1,5 +1,6 @@
 const token = '305297288:AAGNw0Tdxg_Ujqsm_Ip4W_hv5rSRmAZYWUc';
 const steelassholesGroupId = -1001039990033;
+const HEROKU_URL = 'https://dotatimebot.herokuapp.com/';
 
 const fs = require('fs');
 const Telegraf = require('telegraf');
@@ -8,6 +9,7 @@ const Telegram = require('telegraf').Telegram;
 const telegram = new Telegram(token, { agent: null });
 
 const app = new Telegraf(token);
+telegram.setWebHook(HEROKU_URL + token);
 
 var users;
 fs.readFile('users.json', 'utf8', function (err, data) {

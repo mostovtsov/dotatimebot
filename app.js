@@ -9,7 +9,7 @@ const Telegram = require('telegraf').Telegram;
 const telegram = new Telegram(token, { agent: null });
 
 const app = new Telegraf(token);
-telegram.setWebHook(HEROKU_URL + token);
+//telegram.setWebHook(HEROKU_URL + token);
 
 var users;
 fs.readFile('users.json', 'utf8', function (err, data) {
@@ -72,17 +72,19 @@ var getAnyCaseRegex = (word) => {
 };
 
 app.hears('hi', (ctx) => ctx.reply('Hey there!'));
-app.hears('писос', (ctx) => ctx.reply('Сам ты писос!'));
-app.hears('лесник', (ctx) => ctx.reply('Лесники это ЗБС!'));
-const sashaRegex = new RegExp('александр');
+app.hears(new getAnyCaseRegex('писос'), (ctx) => ctx.reply('Сам ты писос!'));
+app.hears(new getAnyCaseRegex('лесник'), (ctx) => ctx.reply('Лесники это ЗБС!'));
+const sashaRegex = new getAnyCaseRegex('александр');
 const slavaRegex = getAnyCaseRegex('славик');
-const maxRegex = new RegExp('макс');
+const maxRegex = new getAnyCaseRegex('макс');
 const kostiyaRegex = getAnyCaseRegex('костя');
+const geibRegex = getAnyCaseRegex('гейб');
 
 app.hears(slavaRegex, (ctx) => ctx.reply('так себе игрок'));
 app.hears(sashaRegex, (ctx) => ctx.reply('Уважаемый'));
 app.hears(maxRegex, (ctx) => ctx.reply('вор'));
 app.hears(kostiyaRegex, (ctx) => ctx.reply('минипижек'));
+app.hears(geibRegex, (ctx) => ctx.reply('half life 3 не будет'));
 app.hears('go', (ctx) => ctx.reply('Go Go Go!'));
 app.hears('хуй', (ctx) => ctx.reply('хуюй'));
 app.hears('твоя мать', (ctx) => ctx.reply('даёт'));

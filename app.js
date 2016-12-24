@@ -1,15 +1,13 @@
-const token = '305297288:AAGNw0Tdxg_Ujqsm_Ip4W_hv5rSRmAZYWUc';
-const steelassholesGroupId = -1001039990033;
-const HEROKU_URL = 'https://dotatimebot.herokuapp.com/';
-
 const fs = require('fs');
 const Telegraf = require('telegraf');
 const Telegram = require('telegraf').Telegram;
 
+var token = process.argv[2];
+var steelassholesGroupId = process.argv[3];
+
 const telegram = new Telegram(token, { agent: null });
 
 const app = new Telegraf(token);
-//telegram.setWebHook(HEROKU_URL + token);
 
 var users;
 fs.readFile('users.json', 'utf8', function (err, data) {
@@ -71,15 +69,17 @@ var getAnyCaseRegex = (word) => {
     return new RegExp(regStr);
 };
 
-app.hears('hi', (ctx) => ctx.reply('Hey there!'));
-app.hears(new getAnyCaseRegex('писос'), (ctx) => ctx.reply('Сам ты писос!'));
-app.hears(new getAnyCaseRegex('лесник'), (ctx) => ctx.reply('Лесники это ЗБС!'));
-const sashaRegex = new getAnyCaseRegex('александр');
+const pisosRegEx = getAnyCaseRegex('писос'); 
+const foresterRegEx = getAnyCaseRegex('лесник')
+const sashaRegex = getAnyCaseRegex('александр');
 const slavaRegex = getAnyCaseRegex('славик');
-const maxRegex = new getAnyCaseRegex('макс');
+const maxRegex = getAnyCaseRegex('макс');
 const kostiyaRegex = getAnyCaseRegex('костя');
 const geibRegex = getAnyCaseRegex('гейб');
 
+app.hears('hi', (ctx) => ctx.reply('Hey there!'));
+app.hears(pisosRegEx, (ctx) => ctx.reply('Сам ты писос!'));
+app.hears(foresterRegEx, (ctx) => ctx.reply('Лесники это ЗБС!'));
 app.hears(slavaRegex, (ctx) => ctx.reply('так себе игрок'));
 app.hears(sashaRegex, (ctx) => ctx.reply('Уважаемый'));
 app.hears(maxRegex, (ctx) => ctx.reply('вор'));

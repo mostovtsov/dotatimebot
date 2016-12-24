@@ -9,20 +9,31 @@ const app = new Telegraf(token);
 const hears = require('./hears');
 const commands = require('./commands');
 
-hears.init(app);
-hears.hears();
+var hearsDictionary;
+fs.readFile('hears.json', 'utf8', function (err, data) {
+    if (err) {
+        console.log(`Can't read hears.json`);
+    }
+    else {
+        hearsDictionary = JSON.parse(data);
+        hears.init(app, hearsDictionary);
+        hears.hears();
+    }
+});
+
+
 
 var users;
 fs.readFile('users.json', 'utf8', function (err, data) {
     if (err) {
-        console.log(`Can't read users.json file`);
+        console.log(`Can't read users.json`);
     }
     else {
         users = JSON.parse(data);
         commands.init(app, users, telegram);
         commands.registerCommandHandlers();
     }
-})
+});
 
 app.on('sticker', (ctx) => ctx.reply('👍'));
 

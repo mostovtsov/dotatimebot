@@ -1,32 +1,22 @@
 var app;
+var dictionary;
 
 var hears = () => {
-    const pisosRegEx = getAnyCaseRegex('писос');
-    const foresterRegEx = getAnyCaseRegex('лесник')
-    const sashaRegex = getAnyCaseRegex('александр');
-    const slavaRegex = getAnyCaseRegex('славик');
-    const maxRegex = getAnyCaseRegex('макс');
-    const kostiyaRegex = getAnyCaseRegex('костя');
-    const geibRegex = getAnyCaseRegex('гейб');
+    if (app && dictionary) {
+        dictionary.forEach(function (item, i, arr) {
+            var regexArray = [];
+            item.text.forEach((text, j, texts) => {
+                regexArray.push(getAnyCaseRegex(text));
+            });
+            app.hears(regexArray, (ctx) => ctx.reply(item.answer));
+        });
 
-    if (app) {
-        app.hears('hi', (ctx) => ctx.reply('Hey there!'));
-        app.hears(pisosRegEx, (ctx) => ctx.reply('Сам ты писос!'));
-        app.hears(foresterRegEx, (ctx) => ctx.reply('Лесники это ЗБС!'));
-        app.hears(slavaRegex, (ctx) => ctx.reply('так себе игрок'));
-        app.hears(sashaRegex, (ctx) => ctx.reply('Уважаемый'));
-        app.hears(maxRegex, (ctx) => ctx.reply('вор'));
-        app.hears(kostiyaRegex, (ctx) => ctx.reply('минипижек'));
-        app.hears(geibRegex, (ctx) => ctx.reply('half life 3 не будет'));
-        app.hears(getAnyCaseRegex('go'), (ctx) => ctx.reply('Go Go Go!'));
-        app.hears('твоя мать', (ctx) => ctx.reply('даёт'));
-        app.hears('дальше вы не пройдёте', (ctx) => ctx.reply('пока не получите бумаги'));
         app.hears(
-            [getAnyCaseRegex('гавно твой бот'),
-            getAnyCaseRegex('гавёный бот'),
-            getAnyCaseRegex('бот гавно'),
-            getAnyCaseRegex('гавно бот')],
-            (ctx) => ctx.reply(`Да сам ты гавно ${ctx.from.first_name}`));
+            [getAnyCaseRegex('говно твой бот'),
+            getAnyCaseRegex('говёный бот'),
+            getAnyCaseRegex('бот говно'),
+            getAnyCaseRegex('говно бот')],
+            (ctx) => ctx.reply(`Да сам ты говно ${ctx.from.first_name}`));
     }
 }
 
@@ -46,8 +36,9 @@ var getAnyCaseRegex = (word) => {
     return new RegExp(regStr);
 };
 
-var init = (bot) => {
+var init = (bot, hearsDictionary) => {
     app = bot;
+    dictionary = hearsDictionary;
 }
 
 module.exports = {

@@ -9,7 +9,7 @@ var hears = () => {
     const kostiyaRegex = getAnyCaseRegex('костя');
     const geibRegex = getAnyCaseRegex('гейб');
 
-     if (app) {
+    if (app) {
         app.hears('hi', (ctx) => ctx.reply('Hey there!'));
         app.hears(pisosRegEx, (ctx) => ctx.reply('Сам ты писос!'));
         app.hears(foresterRegEx, (ctx) => ctx.reply('Лесники это ЗБС!'));
@@ -18,11 +18,15 @@ var hears = () => {
         app.hears(maxRegex, (ctx) => ctx.reply('вор'));
         app.hears(kostiyaRegex, (ctx) => ctx.reply('минипижек'));
         app.hears(geibRegex, (ctx) => ctx.reply('half life 3 не будет'));
-        app.hears('go', (ctx) => ctx.reply('Go Go Go!'));
-        app.hears('хуй', (ctx) => ctx.reply('хуюй'));
+        app.hears(getAnyCaseRegex('go'), (ctx) => ctx.reply('Go Go Go!'));
         app.hears('твоя мать', (ctx) => ctx.reply('даёт'));
         app.hears('дальше вы не пройдёте', (ctx) => ctx.reply('пока не получите бумаги'));
-        app.hears('гавно твой бот', (ctx) => ctx.reply(`Да сам ты гавно ${ctx.from.first_name}`));
+        app.hears(
+            [getAnyCaseRegex('гавно твой бот'),
+            getAnyCaseRegex('гавёный бот'),
+            getAnyCaseRegex('бот гавно'),
+            getAnyCaseRegex('гавно бот')],
+            (ctx) => ctx.reply(`Да сам ты гавно ${ctx.from.first_name}`));
     }
 }
 

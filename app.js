@@ -6,6 +6,18 @@ const Telegraf = require('telegraf');
 const Telegram = require('telegraf').Telegram;
 const telegram = new Telegram(token, { agent: null });
 const app = new Telegraf(token);
+
+// app.telegram.setWebhook('https://server.tld:8443/secret-path', {
+//   content: 'server-cert.pem'
+// })
+
+// // Start https webhook
+// app.startWebhook('/secret-path', tlsOptions, 8443)
+
+
+// Http webhook, for nginx/heroku users.
+app.startWebhook('/secret-path', null, 5000);
+
 const hears = require('./hears');
 const commands = require('./commands');
 

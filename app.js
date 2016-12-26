@@ -17,10 +17,10 @@ const app = new Telegraf(token);
 //   key:  fs.readFileSync('YOURPRIVATE.key'),
 //   cert: fs.readFileSync('YOURPUBLIC.pem')
 // };
-console.log('set webhook', hostname + token);
-app.telegram.setWebhook(hostname + token, {
-    content: 'YOURPUBLIC.pem'
-});
+// console.log('set webhook', hostname + token);
+// app.telegram.setWebhook(hostname + token, {
+//     content: 'YOURPUBLIC.pem'
+// });
 
 // app.startWebhook('/' + token, tlsOptions, 8443);
 

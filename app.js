@@ -26,7 +26,7 @@ app.telegram.setWebhook(hostname + token, {
 
 // Http webhook, for nginx/heroku users.
 console.log('starting web hook...');
-app.startWebhook('/' + token, null, 5000);
+app.startWebhook('/' + token, null, 8443);
 
 const hears = require('./hears');
 const commands = require('./commands');

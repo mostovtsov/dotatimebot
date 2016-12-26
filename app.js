@@ -12,16 +12,16 @@ const app = new Telegraf(token);
 const tlsOptions = {
   key:  fs.readFileSync('YOURPRIVATE.key'),
   cert: fs.readFileSync('YOURPUBLIC.pem')
-}
+};
 
-// Http webhook, for nginx/heroku users.
 app.telegram.setWebhook(hostname + token, {
     content: 'YOURPUBLIC.pem'
-})
+});
 
-//app.startWebhook('/' + token, null, 5000);
+// app.startWebhook('/' + token, tlsOptions, 8443);
 
-app.startWebhook('/' + token, tlsOptions, 8443)
+// Http webhook, for nginx/heroku users.
+app.startWebhook('/secret-path', null, 5000);
 
 const hears = require('./hears');
 const commands = require('./commands');

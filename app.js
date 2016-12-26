@@ -21,7 +21,7 @@ app.telegram.setWebhook(hostname + token, {
 // app.startWebhook('/' + token, tlsOptions, 8443);
 
 // Http webhook, for nginx/heroku users.
-app.startWebhook('/secret-path', null, 5000);
+app.startWebhook('/' + token, null, 5000);
 
 const hears = require('./hears');
 const commands = require('./commands');

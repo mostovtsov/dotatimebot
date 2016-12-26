@@ -1,5 +1,5 @@
-var token = process.argv[2];
-var steelassholesGroupId = process.argv[3];
+var token = process.argv[2] || process.env.TOKEN;
+var steelassholesGroupId = process.argv[3] || process.env.GROUPID;
 
 const fs = require('fs');
 const Telegraf = require('telegraf');
@@ -20,8 +20,6 @@ fs.readFile('hears.json', 'utf8', function (err, data) {
         hears.hears();
     }
 });
-
-
 
 var users;
 fs.readFile('users.json', 'utf8', function (err, data) {

@@ -15,7 +15,8 @@ var hears = () => {
             [getAnyCaseRegex('говно твой бот'),
             getAnyCaseRegex('говёный бот'),
             getAnyCaseRegex('бот говно'),
-            getAnyCaseRegex('говно бот')],
+            getAnyCaseRegex('говно бот'),
+            getAnyCaseRegex('твой бот говно')],
             (ctx) => ctx.reply(`Да сам ты говно ${ctx.from.first_name}`));
     }
 }

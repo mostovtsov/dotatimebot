@@ -1,5 +1,7 @@
 var token = process.argv[2] || process.env.TOKEN;
 var steelassholesGroupId = process.argv[3] || process.env.GROUPID;
+var hostname = process.env.HOSTNAME;
+
 
 const fs = require('fs');
 const Telegraf = require('telegraf');
@@ -7,16 +9,19 @@ const Telegram = require('telegraf').Telegram;
 const telegram = new Telegram(token, { agent: null });
 const app = new Telegraf(token);
 
-// app.telegram.setWebhook('https://server.tld:8443/secret-path', {
-//   content: 'server-cert.pem'
-// })
-
-// // Start https webhook
-// app.startWebhook('/secret-path', tlsOptions, 8443)
-
+const tlsOptions = {
+  key:  fs.readFileSync('YOURPRIVATE.key'),
+  cert: fs.readFileSync('YOURPUBLIC.pem')
+}
 
 // Http webhook, for nginx/heroku users.
-app.startWebhook('/secret-path', null, 5000);
+app.telegram.setWebhook(hostname + token, {
+    content: 'YOURPUBLIC.pem'
+})
+
+//app.startWebhook('/' + token, null, 5000);
+
+app.startWebhook('/' + token, tlsOptions, 8443)
 
 const hears = require('./hears');
 const commands = require('./commands');

@@ -17,16 +17,16 @@ const app = new Telegraf(token);
 //   key:  fs.readFileSync('YOURPRIVATE.key'),
 //   cert: fs.readFileSync('YOURPUBLIC.pem')
 // };
-// console.log('set webhook', hostname + token);
-// app.telegram.setWebhook(hostname + token, {
-//     content: 'YOURPUBLIC.pem'
-// });
+console.log('set webhook', hostname + token);
+app.telegram.setWebhook(hostname + token, {
+    content: 'YOURPUBLIC.pem'
+});
 
 // app.startWebhook('/' + token, tlsOptions, 8443);
 
 // Http webhook, for nginx/heroku users.
-console.log('starting web hook...');
-app.startWebhook('/' + token, null, 8443);
+// console.log('starting web hook...');
+// app.startWebhook('/' + token, null, 8443);
 
 const hears = require('./hears');
 const commands = require('./commands');

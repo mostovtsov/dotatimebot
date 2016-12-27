@@ -1,3 +1,4 @@
+const hears = require('./hears');
 var app;
 var users = [];
 var telegram;
@@ -16,9 +17,11 @@ var registerCommandHandlers = () => {
 
     app.command('help', (ctx) => {
         console.log('help', ctx.from.first_name);
-        ctx.reply(`dota - to start notify group members for starting game`);
-        ctx.reply(`last - to show last matches from dotabuff.com`);
-        ctx.reply(`twitch - to show live dota 2`);
+        ctx.reply(`dota - Send notification to team members`);
+        ctx.reply(`last - Get latest played matches`);
+        ctx.reply(`twitch - Watch dota 2 streams`);
+        ctx.reply(`update - Update bot hears configuration`);
+        ctx.reply(`help - Show available commands`);
     });
 
     app.command('last', (ctx) => {
@@ -27,6 +30,17 @@ var registerCommandHandlers = () => {
         if (user) {
             ctx.reply(user.URL);
         }
+    });
+
+    app.command('update', (ctx) => {
+        console.log('update', ctx.from.first_name);
+        // var user = users.find(u => u.user.id === ctx.from.id);
+        // if (user) {
+        //     ctx.reply(user.URL);
+        // }
+        hears.init(app);
+        hears.updateHears();
+        ctx.reply('Hears updated');
     });
 
     app.command('twitch', (ctx) => {

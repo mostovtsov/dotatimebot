@@ -1,6 +1,6 @@
 var token = process.argv[2] || process.env.TOKEN;
 var steelassholesGroupId = process.argv[3] || process.env.GROUPID;
-var hostname = process.env.HOSTNAME;
+var hostname = process.env.HOSTNAME || process.env.hostname;
 
 console.log(token);
 console.log(steelassholesGroupId);
@@ -31,17 +31,28 @@ const app = new Telegraf(token);
 const hears = require('./hears');
 const commands = require('./commands');
 
-var hearsDictionary;
-fs.readFile('hears.json', 'utf8', function (err, data) {
-    if (err) {
-        console.log(`Can't read hears.json`);
-    }
-    else {
-        hearsDictionary = JSON.parse(data);
-        hears.init(app, hearsDictionary);
+//var hearsDictionary;
+hears.init(app);
+hears.getHears((errorMessage, results) => {
+    if (errorMessage) {
+        console.log(errorMessage);
+    } else {
+        //hearsDictionary = results.hearsDictionary;
         hears.hears();
     }
 });
+
+
+// fs.readFile('hears.json', 'utf8', function (err, data) {
+//     if (err) {
+//         console.log(`Can't read hears.json`);
+//     }
+//     else {
+//         hearsDictionary = JSON.parse(data);
+//         hears.init(app, hearsDictionary);
+//         hears.hears();
+//     }
+// });
 
 var users;
 fs.readFile('users.json', 'utf8', function (err, data) {

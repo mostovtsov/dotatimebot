@@ -1,5 +1,25 @@
+const request = require('request');
+const apiEndpoint = `https://dotatimebotapi.herokuapp.com/hears`;
 var app;
 var dictionary;
+
+var getHears = (callback) => {
+    request({
+        url: apiEndpoint,
+        json: true
+    }, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+            console.log(body);
+            dictionary = body;
+            callback(undefined, {
+                hearsDictionary: dictionary
+            });
+
+        } else {
+            callback(`Can't load hears`);
+        }
+    });
+};
 
 var hears = () => {
     if (app && dictionary) {
@@ -21,6 +41,16 @@ var hears = () => {
     }
 }
 
+var updateHears = () => {
+    getHears((errorMessage, results) => {
+        if (errorMessage) {
+            console.log(errorMessage);
+        } else {
+            hears();
+        }
+    });
+};
+
 var generateCharTemplate = (char) => {
     return `[${char.toLowerCase()}|${char.toUpperCase()}]`;
 };
@@ -37,12 +67,13 @@ var getAnyCaseRegex = (word) => {
     return new RegExp(regStr);
 };
 
-var init = (bot, hearsDictionary) => {
+var init = (bot) => {
     app = bot;
-    dictionary = hearsDictionary;
 }
 
 module.exports = {
     hears,
-    init
+    init,
+    getHears,
+    updateHears
 }

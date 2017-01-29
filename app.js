@@ -42,18 +42,6 @@ hears.getHears((errorMessage, results) => {
     }
 });
 
-
-// fs.readFile('hears.json', 'utf8', function (err, data) {
-//     if (err) {
-//         console.log(`Can't read hears.json`);
-//     }
-//     else {
-//         hearsDictionary = JSON.parse(data);
-//         hears.init(app, hearsDictionary);
-//         hears.hears();
-//     }
-// });
-
 var users;
 fs.readFile('users.json', 'utf8', function (err, data) {
     if (err) {

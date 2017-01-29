@@ -23,6 +23,7 @@ var getHears = (callback) => {
 
 var hears = () => {
     if (app && dictionary) {
+        //app.stop();
         dictionary.forEach(function (item, i, arr) {
             var regexArray = [];
             item.text.forEach((text, j, texts) => {
@@ -38,6 +39,8 @@ var hears = () => {
             getAnyCaseRegex('говно бот'),
             getAnyCaseRegex('твой бот говно')],
             (ctx) => ctx.reply(`Да сам ты говно ${ctx.from.first_name}`));
+
+        //app.startPolling();
     }
 }
 
@@ -70,6 +73,8 @@ var getAnyCaseRegex = (word) => {
 var init = (bot) => {
     app = bot;
 }
+
+
 
 module.exports = {
     hears,

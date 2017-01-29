@@ -16,12 +16,13 @@ var registerCommandHandlers = () => {
     });
 
     app.command(['help', '/help@DotaTimeBot', 'help@DotaTimeBot'], (ctx) => {
-        console.log('help', ctx.from.first_name);
-        ctx.reply(`dota - Send notification to team members`);
-        ctx.reply(`last - Get latest played matches`);
-        ctx.reply(`twitch - Watch dota 2 streams`);
-        ctx.reply(`update - Update bot hears configuration`);
-        ctx.reply(`help - Show available commands`);
+        console.log('/help', ctx.from.first_name);
+        ctx.reply(`/dota - Send notification to team members`);
+        ctx.reply(`/last - Get latest played matches`);
+        ctx.reply(`/twitch - Watch dota 2 streams`);
+        ctx.reply(`/update - Update bot hears configuration`);
+        ctx.reply(`/help - Show available commands`);
+        ctx.reply(`/editor - Return editor URL`);
     });
 
     app.command(['last', '/last@DotaTimeBot', 'last@DotaTimeBot'], (ctx) => {
@@ -42,6 +43,11 @@ var registerCommandHandlers = () => {
     app.command(['twitch', '/twitch@DotaTimeBot', 'twitch@DotaTimeBot'], (ctx) => {
         console.log('twitch', ctx.from.first_name);
         ctx.reply(`https://www.twitch.tv/directory/game/Dota%202/ru`);
+    });
+
+     app.command(['editor', '/editor@DotaTimeBot', 'editor@DotaTimeBot'], (ctx) => {
+        console.log('editor', ctx.from.first_name);
+        ctx.reply(`https://dotatimebotapi.herokuapp.com/`);
     });
 
     app.command(['dota', '/dota@DotaTimeBot', 'dota@DotaTimeBot'], (ctx) => {
